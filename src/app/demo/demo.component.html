@@ -1,5 +1,7 @@
 
-<button type="button" (click)="signInWithFB()"> Facebook </button>
+<button *ngIf="!user" type="button" (click)="signInWithFB()"> Facebook </button>
+
+<button *ngIf="user" type="button" (click)="signOut()"> Logout</button>
 
 <img src="{{ user?.photoUrl }}">
 <div>
