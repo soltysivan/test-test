@@ -21,11 +21,16 @@ export class DemoComponent implements OnInit {
   }
 
   signInWithFB(): void {
-    this.authService.signIn(FacebookLoginProvider.PROVIDER_ID);
+    this.authService.signIn(FacebookLoginProvider.PROVIDER_ID)
+      .then( user => {
+        console.log(user);
+      })
+      .catch(err => alert(JSON.stringify(err)));
   }
 
   signOut(): void {
     this.authService.signOut();
+    this.facebookUserProfile = null;
   }
 
   ngOnInit() {
@@ -35,13 +40,13 @@ export class DemoComponent implements OnInit {
       if (this.loggedIn){
         this.getUserData(user.authToken);
       }
-    });
+    })
   }
 
   getUserData(accessToken){
     this.getData(accessToken).subscribe( user => {
       this.facebookUserProfile = user;
-    })
+    }, error => alert(JSON.stringify(error)));
   }
 
 
