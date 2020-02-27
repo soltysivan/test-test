@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService, FacebookLoginProvider, SocialUser } from 'angularx-social-login';
+import { HttpClient, HttpParams } from "@angular/common/http";
+import { Observable } from "rxjs";
+import { FacebookUserProfile } from "./FacebookUserProfile";
 
 @Component({
   selector: 'app-demo',
@@ -9,9 +12,12 @@ import { AuthService, FacebookLoginProvider, SocialUser } from 'angularx-social-
 export class DemoComponent implements OnInit {
 
   public user: SocialUser;
+  public facebookUserProfile: FacebookUserProfile;
   private loggedIn: boolean;
+  private facebookPath = 'https://graph.facebook.com/v3.1/me';
 
-  constructor(public authService: AuthService) {
+  constructor(public authService: AuthService,
+              private http: HttpClient) {
   }
 
   signInWithFB(): void {
@@ -26,7 +32,25 @@ export class DemoComponent implements OnInit {
     this.authService.authState.subscribe((user) => {
       this.user = user;
       this.loggedIn = (user != null);
+      if (this.loggedIn){
+        this.getUserData(user.authToken);
+      }
     });
+  }
+
+  getUserData(accessToken){
+    this.getData(accessToken).subscribe( user => {
+      this.facebookUserProfile = user;
+    })
+  }
+
+
+  getData(accessToken: string): Observable<any> {
+    const params = new HttpParams()
+      .set('access_token', accessToken)
+      .set('fields', 'name,email,last_name,first_name,picture');
+
+    return this.http.get<Observable<any>>(`${this.facebookPath}`, {params});
   }
 
 }

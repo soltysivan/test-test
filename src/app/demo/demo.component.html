@@ -3,8 +3,11 @@
 
 <button *ngIf="user" type="button" (click)="signOut()"> Logout</button>
 
+
 <img src="{{ user?.photoUrl }}">
 <div>
   <h4>{{ user?.name }}</h4>
   <p>{{ user?.email }}</p>
 </div>
+
+<div>{{facebookUserProfile | json}}</div>

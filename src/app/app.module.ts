@@ -5,6 +5,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { AuthServiceConfig, FacebookLoginProvider, LoginOpt, SocialLoginModule } from 'angularx-social-login';
 import { DemoComponent } from './demo/demo.component';
+import { HttpClientModule } from "@angular/common/http";
 
 const fbLoginOptions: LoginOpt = {
   scope: 'pages_messaging,pages_messaging_subscriptions,email,pages_show_list,manage_pages',
@@ -30,11 +31,13 @@ export function provideConfig() {
     DemoComponent
   ],
   imports: [
+    HttpClientModule,
     BrowserModule,
     AppRoutingModule,
     SocialLoginModule
   ],
   providers: [
+
     {
       provide: AuthServiceConfig,
       useFactory: provideConfig
