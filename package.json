@@ -23,6 +23,7 @@
     "angularx-social-login": "^2.2.1",
     "express": "^4.17.1",
     "rxjs": "~6.5.4",
+    "superagent": "^5.2.2",
     "tslib": "^1.10.0",
     "zone.js": "~0.10.2"
   },

@@ -13,6 +13,7 @@ export class DemoComponent implements OnInit {
 
   public user: SocialUser;
   public facebookUserProfile: FacebookUserProfile;
+  public userProfile: any;
   private loggedIn: boolean;
   private facebookPath = 'https://graph.facebook.com/v3.1/me';
 
@@ -40,7 +41,7 @@ export class DemoComponent implements OnInit {
       if (this.loggedIn){
         this.getUserData(user.authToken);
       }
-    })
+    });
   }
 
   getUserData(accessToken){
@@ -56,6 +57,19 @@ export class DemoComponent implements OnInit {
       .set('fields', 'name,email,last_name,first_name,picture');
 
     return this.http.get<Observable<any>>(`${this.facebookPath}`, {params});
+  }
+
+  getProfileUser(){
+    this.getProfile(this.user.authToken).subscribe( userProfile => {
+      this.userProfile = userProfile;
+    })
+  }
+
+  getProfile(accessToken: string): Observable<any> {
+    const params = new HttpParams()
+      .set('access_token', accessToken);
+
+    return this.http.get<Observable<any>>(`/profile`, {params});
   }
 
 }

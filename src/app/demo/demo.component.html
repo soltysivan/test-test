@@ -3,7 +3,7 @@
 
 <button *ngIf="user" type="button" (click)="signOut()"> Logout</button>
 
-
+<button *ngIf="user" type="button" (click)="getProfileUser()"> Get Profile </button>
 <img src="{{ user?.photoUrl }}">
 <div>
   <h4>{{ user?.name }}</h4>
