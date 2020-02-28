@@ -1,6 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { AuthServiceConfig, LoginOpt, SocialLoginModule } from 'angularx-social-login';
@@ -41,7 +40,6 @@ export function provideConfig() {
     ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production })
   ],
   providers: [
-
     {
       provide: AuthServiceConfig,
       useFactory: provideConfig

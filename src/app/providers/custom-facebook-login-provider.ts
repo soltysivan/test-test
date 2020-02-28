@@ -1,5 +1,4 @@
-import { BaseLoginProvider } from 'angularx-social-login/lib/entities/base-login-provider';
-import { LoginOpt, SocialUser } from 'angularx-social-login';
+import { LoginOpt, SocialUser, ɵa as BaseLoginProvider } from 'angularx-social-login';
 
 
 declare let FB: any;
