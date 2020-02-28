@@ -2,7 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { AuthServiceConfig, LoginOpt, SocialLoginModule } from 'angularx-social-login';
+import { AuthServiceConfig, FacebookLoginProvider, LoginOpt, SocialLoginModule } from 'angularx-social-login';
 import { DemoComponent } from './demo/demo.component';
 import { HttpClientModule } from '@angular/common/http';
 import { ServiceWorkerModule } from '@angular/service-worker';
@@ -18,8 +18,8 @@ const fbLoginOptions: LoginOpt = {
 
 const config = new AuthServiceConfig([
   {
-    id: CustomFacebookLoginProvider.PROVIDER_ID,
-    provider: new CustomFacebookLoginProvider('175067990580834', fbLoginOptions)
+    id: FacebookLoginProvider.PROVIDER_ID,
+    provider: new FacebookLoginProvider('175067990580834', fbLoginOptions)
   }
 ]);
 
@@ -27,7 +27,7 @@ const fakeConfig = new AuthServiceConfig([
 ]);
 
 export function provideConfig() {
-  return fakeConfig;
+  return config;
 }
 
 @NgModule({
