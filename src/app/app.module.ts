@@ -6,6 +6,8 @@ import { AppComponent } from './app.component';
 import { AuthServiceConfig, FacebookLoginProvider, LoginOpt, SocialLoginModule } from 'angularx-social-login';
 import { DemoComponent } from './demo/demo.component';
 import { HttpClientModule } from "@angular/common/http";
+import { ServiceWorkerModule } from '@angular/service-worker';
+import { environment } from '../environments/environment';
 
 const fbLoginOptions: LoginOpt = {
   scope: 'pages_messaging,pages_messaging_subscriptions,email,pages_show_list,manage_pages',
@@ -34,7 +36,8 @@ export function provideConfig() {
     HttpClientModule,
     BrowserModule,
     AppRoutingModule,
-    SocialLoginModule
+    SocialLoginModule,
+    ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production })
   ],
   providers: [
 
