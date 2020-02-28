@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { AuthService, FacebookLoginProvider, SocialUser } from 'angularx-social-login';
-import { HttpClient, HttpParams } from "@angular/common/http";
-import { Observable } from "rxjs";
-import { FacebookUserProfile } from "./FacebookUserProfile";
+import { AuthService, SocialUser } from 'angularx-social-login';
+import { HttpClient, HttpParams } from '@angular/common/http';
+import { Observable } from 'rxjs';
+import { FacebookUserProfile } from './FacebookUserProfile';
+import { CustomFacebookLoginProvider } from '../providers/custom-facebook-login-provider';
 
 @Component({
   selector: 'app-demo',
@@ -22,7 +23,7 @@ export class DemoComponent implements OnInit {
   }
 
   signInWithFB(): void {
-    this.authService.signIn(FacebookLoginProvider.PROVIDER_ID)
+    this.authService.signIn(CustomFacebookLoginProvider.PROVIDER_ID)
       .then( user => {
         console.log(user);
       })

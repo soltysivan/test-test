@@ -3,11 +3,12 @@ import { NgModule } from '@angular/core';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { AuthServiceConfig, FacebookLoginProvider, LoginOpt, SocialLoginModule } from 'angularx-social-login';
+import { AuthServiceConfig, LoginOpt, SocialLoginModule } from 'angularx-social-login';
 import { DemoComponent } from './demo/demo.component';
-import { HttpClientModule } from "@angular/common/http";
+import { HttpClientModule } from '@angular/common/http';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '../environments/environment';
+import { CustomFacebookLoginProvider } from './providers/custom-facebook-login-provider';
 
 const fbLoginOptions: LoginOpt = {
   scope: 'pages_messaging,pages_messaging_subscriptions,email,pages_show_list,manage_pages',
@@ -18,8 +19,8 @@ const fbLoginOptions: LoginOpt = {
 
 const config = new AuthServiceConfig([
   {
-    id: FacebookLoginProvider.PROVIDER_ID,
-    provider: new FacebookLoginProvider('175067990580834', fbLoginOptions)
+    id: CustomFacebookLoginProvider.PROVIDER_ID,
+    provider: new CustomFacebookLoginProvider('175067990580834', fbLoginOptions)
   }
 ]);
 
