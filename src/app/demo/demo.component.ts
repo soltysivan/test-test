@@ -47,12 +47,17 @@ export class DemoComponent implements OnInit {
     });
   }
 
+  deleteCookie(name) {
+    document.cookie = name +'=; Path=/; Expires=Thu, 01 Jan 1970 00:00:01 GMT;';
+  }
+
   getStatus() {
     let fbLoginOptions: LoginOpt = {
       scope: 'pages_messaging,pages_messaging_subscriptions,email,pages_show_list,manage_pages',
       return_scopes: true,
       enable_profile_selector: true
     };
+    this.deleteCookie("fblo_" + '175067990580834');
     FB.getLoginStatus((response: any) => {
       if (response.status === 'connected') {
         let authResponse = response.authResponse;
