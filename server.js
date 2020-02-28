@@ -15,7 +15,11 @@ app.get('/profile', (req, res) => {
       console.log(responce);
       res.send(responce)
     })
-    .catch(console.error);
+    .catch(err => {
+      console.error(err);
+      res.status(500);
+      res.send(err);
+    });
 });
 
 app.listen(PORT, () => {
