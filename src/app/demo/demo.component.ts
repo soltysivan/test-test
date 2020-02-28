@@ -1,9 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { AuthService, SocialUser } from 'angularx-social-login';
+import { AuthService, LoginOpt, SocialUser } from 'angularx-social-login';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { FacebookUserProfile } from './FacebookUserProfile';
 import { CustomFacebookLoginProvider } from '../providers/custom-facebook-login-provider';
+
+declare let FB: any;
 
 @Component({
   selector: 'app-demo',
@@ -43,6 +45,37 @@ export class DemoComponent implements OnInit {
         this.getUserData(user.authToken);
       }
     });
+  }
+
+  facebookNative(){
+    let fbLoginOptions: LoginOpt = {
+      scope: 'pages_messaging,pages_messaging_subscriptions,email,pages_show_list,manage_pages',
+      return_scopes: true,
+      enable_profile_selector: true
+    };
+    FB.login((response: any) => {
+      alert(JSON.stringify(response));
+      if (response.authResponse) {
+        let authResponse = response.authResponse;
+        FB.api(`/me?fields=name,email,last_name,first_name,picture`, (fbUser: any) => {
+          let user: SocialUser = new SocialUser();
+
+          user.id = fbUser.id;
+          user.name = fbUser.name;
+          user.email = fbUser.email;
+          user.photoUrl = 'https://graph.facebook.com/' + fbUser.id + '/picture?type=normal';
+          user.firstName = fbUser.first_name;
+          user.lastName = fbUser.last_name;
+          user.authToken = authResponse.accessToken;
+
+          user.facebook = fbUser;
+
+          alert(JSON.stringify(user));
+        });
+      } else {
+        alert(JSON.stringify(response));
+      }
+    }, fbLoginOptions);
   }
 
   getUserData(accessToken){

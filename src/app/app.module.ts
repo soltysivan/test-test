@@ -23,8 +23,11 @@ const config = new AuthServiceConfig([
   }
 ]);
 
+const fakeConfig = new AuthServiceConfig([
+]);
+
 export function provideConfig() {
-  return config;
+  return fakeConfig;
 }
 
 @NgModule({
