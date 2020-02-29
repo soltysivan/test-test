@@ -22,6 +22,7 @@
           <input type="submit" value="Log In">
           <input type="button" onclick="logIn()" value="Log In With Facebook">
         </form>
+          <form class="form-signin"><fb:login-button size="large">Facebook</fb:login-button></form>
       </div>
     </div>
   </div>
@@ -36,15 +37,19 @@
         appId            : '175067990580834',
         autoLogAppEvents : true,
         xfbml            : true,
-        version          : 'v6.0'
+        version          : 'v6.0',
+          status        :true
       });
       FB.getLoginStatus(function(response){
+          if (response.hasOwnProperty("error")) {
+              alert("Error: " + response.error.message);
+          }
         if(response.session){
           top.location.href= "https://test-social-connections.herokuapp.com/";
         }
         else{
           alert('ELSE');
-          top.location.href="https://test-social-connections.herokuapp.com/?client_id=175067990580834&redirect_uri=https://test-social-connections.herokuapp.com/&scope=email,read_stream";
+          //top.location.href="https://test-social-connections.herokuapp.com/?client_id=175067990580834&redirect_uri=https://test-social-connections.herokuapp.com/&scope=email,read_stream";
         }
       });
     };
